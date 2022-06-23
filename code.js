@@ -28,6 +28,7 @@ var b = 0;
 // }
 function makeButtonsAndOutput(number, operators)
 {
+     var tof = false;
      for (i = 0; i < 5; i++)
      {
           var operators = document.createElement('button');
@@ -36,6 +37,12 @@ function makeButtonsAndOutput(number, operators)
           container.appendChild(operators);
           operators.addEventListener('click' , function(event)
           {
+               tof = !tof;
+               if (event.target.textContent = "=")
+               {
+                    tof = true;
+               }
+               add(a, b)
                output.textContent = event.target.textContent;
           });
      }
@@ -47,20 +54,38 @@ function makeButtonsAndOutput(number, operators)
           number.addEventListener('click' , function(event)
           {
                output.textContent += event.target.textContent;
-               a = parseInt(output.textContent);
+               if (tof = true)
+               {
+                    a += parseInt(output.textContent);
+               }
+               if (tof = false)
+               {
+                    b += parseInt(output.textContent);
+               }
+               if (output.textContent = '=')
+               {
+                    output.textContent = a;
+               }
           });
           container.appendChild(number);
+          if (output.textContent = '=')
+          {
+               output.textContent = add(a,b)
+          }
      }
 }
+     if (output.textContent = '=')
+     {
+          output.textContent = add(a,b)
+     }
      clear.addEventListener('click', function()
      {
           output.textContent = ''
      });
      
-     function add(a)
+     function add(a, b)
      {
-          sum = 0;
-          return sum += a;
+          return a+b;
      }
      
      function subtract(a)
