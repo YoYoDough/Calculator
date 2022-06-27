@@ -13,7 +13,7 @@
     left: 700px;
     outline: 2px solid black;
     width: 500px;
-    height: 400px;
+    height: 450px;
     display: -ms-inline-grid;
     flex-direction: column;
 }
@@ -29,7 +29,20 @@
     width: 90px;
     height: 100px;
 }
+.equals{
+    width: 90px;
+    height: 100px;
+}
 .box{
     width: 100px;
     height: 70px;
+}
+.clear{
+    width: 50px;
+    height: 50px;
+}
+#clear{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 50px;
 }

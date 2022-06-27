@@ -1,9 +1,11 @@
 var container = document.getElementById('container');
 var output = document.querySelector('.output')
-var divisibles = ['+', '-', '/', '*', '=']
+var divisibles = ['+', '-', '/', '*']
 var clear = document.getElementById('clear')
-var a = 0;
-var b = 0;
+var prevOutput = document.querySelector('.previousNumber')
+var a = '';
+var b = '';
+var equals = '';
 // for (i = 0; i < 5; i++)
 // {
 //     var operators = document.createElement('button');
@@ -26,82 +28,104 @@ var b = 0;
 //    });
 //    container.appendChild(number);
 // }
-function makeButtonsAndOutput(number, operators)
-{
-     var tof = false;
-     for (i = 0; i < 5; i++)
+var operator = ''
+var count = 0;
+var tof = false;
+     function makeButtons(number, operators, equals)
      {
-          var operators = document.createElement('button');
-          operators.classList.add('operators');
-          operators.textContent = divisibles[i];
-          container.appendChild(operators);
-          operators.addEventListener('click' , function(event)
+          for (i = 0; i < 4; i++)
           {
-               tof = !tof;
-               if (event.target.textContent = "=")
+               var operators = document.createElement('button');
+               operators.classList.add('operators');
+               operators.textContent = divisibles[i];
+               container.appendChild(operators);
+               operators.addEventListener('click' , function(event)
                {
                     tof = true;
-               }
-               add(a, b)
-               output.textContent = event.target.textContent;
-          });
-     }
-     for(i = 0; i < 10; i++)
-     {
-          var number = document.createElement('button');
-          number.classList.add('box');
-          number.textContent = i;
-          number.addEventListener('click' , function(event)
-          {
-               output.textContent += event.target.textContent;
-               if (tof = true)
-               {
-                    a += parseInt(output.textContent);
-               }
-               if (tof = false)
-               {
-                    b += parseInt(output.textContent);
-               }
-               if (output.textContent = '=')
-               {
-                    output.textContent = a;
-               }
-          });
-          container.appendChild(number);
-          if (output.textContent = '=')
-          {
-               output.textContent = add(a,b)
+                    prevOutput.textContent += event.target.textContent
+                    output.textContent = '';
+                    operator = event.target.textContent;
+               });
           }
-     }
-}
-     if (output.textContent = '=')
-     {
-          output.textContent = add(a,b)
+          equals = document.createElement('button');
+          equals.classList.add('equals');
+          equals.textContent = '=';
+          equals.addEventListener('click', function()
+          {
+               output.textContent = operate(operator, a, b)
+               tof = true;
+          });
+          container.appendChild(equals);
+          for(i = 0; i < 10; i++)
+          {
+               var number = document.createElement('button');
+               number.classList.add('box');
+               number.textContent = i;
+               number.addEventListener('click' , function(event)
+               {
+                    count++;
+                    prevOutput.textContent += event.target.textContent;
+                    output.textContent += event.target.textContent;
+                    if (count != 0 && tof == false)
+                    {
+                         a = output.textContent;
+                         a = parseInt(a);
+                    }
+                    if (tof == true)
+                    {
+                         b = output.textContent;
+                         b = parseInt(b);
+                    }
+               });
+               container.appendChild(number);
+          }
      }
      clear.addEventListener('click', function()
      {
           output.textContent = ''
+          prevOutput.textContent = '';
+          a = 0;
+          b = 0;
      });
      
-     function add(a, b)
+     function add(first, second)
      {
-          return a+b;
+          return first+second;
      }
      
-     function subtract(a)
+     function subtract(first, second)
      {
-          return a-b;
+          return first-second;
      }
 
-     function multiply(a, b)
+     function multiply(first, second)
      {
-          return a*b
+          return first*second
      }
 
-     function divide(a, b)
+     function divide(first, second)
      {
-          return a/b;
+          return first/second;
+     }
+
+     function operate(operator, first, second)
+     {
+          first = Number(first)
+          second = Number(second)
+          switch (operator) {
+          case '+':
+               return add(first, second)
+          case '-':
+               return subtract(first, second)
+          case '*':
+               return multiply(first, second)
+          case '/':
+               if (second === 0) return null
+               else return divide(first, second)
+          default:
+               return null
+  }
      }
 
 
-makeButtonsAndOutput();
+makeButtons();
