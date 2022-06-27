@@ -31,6 +31,7 @@ var equals = '';
 var operator = ''
 var count = 0;
 var tof = false;
+var operands = 0;
      function makeButtons(number, operators, equals)
      {
           for (i = 0; i < 4; i++)
@@ -41,6 +42,15 @@ var tof = false;
                container.appendChild(operators);
                operators.addEventListener('click' , function(event)
                {
+                    operands++;
+                    if (operands == 2)
+                    {
+                         output.textContent = operate(operator, a, b)
+                         a = operate(operator, a, b);
+                         tof = !tof;
+                         count = 0;
+                         operands--;
+                    }
                     tof = true;
                     prevOutput.textContent += event.target.textContent
                     output.textContent = '';
@@ -50,10 +60,13 @@ var tof = false;
           equals = document.createElement('button');
           equals.classList.add('equals');
           equals.textContent = '=';
-          equals.addEventListener('click', function()
+          equals.addEventListener('click', function(event)
           {
+               
                output.textContent = operate(operator, a, b)
-               tof = true;
+               a = operate(operator, a, b);
+               tof = false;
+               count = 0;
           });
           container.appendChild(equals);
           for(i = 0; i < 10; i++)
