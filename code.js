@@ -65,6 +65,7 @@ var operands = 0;
                
                output.textContent = operate(operator, a, b)
                a = operate(operator, a, b);
+               b = 0;
                tof = false;
                count = 0;
           });
@@ -79,7 +80,7 @@ var operands = 0;
                     count++;
                     prevOutput.textContent += event.target.textContent;
                     output.textContent += event.target.textContent;
-                    if (count != 0 && tof == false)
+                    if (count != 0 && tof == false && operands == 0)
                     {
                          a = output.textContent;
                          a = parseInt(a);
