@@ -62,7 +62,7 @@ var operands = 0;
           equals.textContent = '=';
           equals.addEventListener('click', function(event)
           {
-               output.textContent = operate(operator, a, b)
+               output.textContent = operate(operator, a, b);
                a = operate(operator, a, b);
                b = 0;
                tof = false;
