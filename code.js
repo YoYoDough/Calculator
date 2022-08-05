@@ -45,14 +45,14 @@ var operands = 0;
                     operands++;
                     if (operands == 2)
                     {
-                         output.textContent = operate(operator, a, b)
+                         output.textContent = operate(operator, a, b);
                          a = operate(operator, a, b);
                          tof = !tof;
                          count = 0;
                          operands--;
                     }
                     tof = true;
-                    prevOutput.textContent += event.target.textContent
+                    prevOutput.textContent += event.target.textContent;
                     output.textContent = '';
                     operator = event.target.textContent;
                });
@@ -62,7 +62,6 @@ var operands = 0;
           equals.textContent = '=';
           equals.addEventListener('click', function(event)
           {
-               
                output.textContent = operate(operator, a, b)
                a = operate(operator, a, b);
                b = 0;
@@ -96,10 +95,15 @@ var operands = 0;
      }
      clear.addEventListener('click', function()
      {
-          output.textContent = ''
+          output.textContent = '';
           prevOutput.textContent = '';
-          a = 0;
-          b = 0;
+          a = '';
+          b = '';
+          equals = '';
+          operator = '';
+          count = 0;
+          tof = false;
+          operands = 0;
      });
      
      function add(first, second)
