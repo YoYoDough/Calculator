@@ -32,6 +32,8 @@ var operator = ''
 var count = 0;
 var tof = false;
 var operands = 0;
+var DNE = false;
+var negNumber = false;
      function makeButtons(number, operators, equals)
      {
           for (i = 0; i < 4; i++)
@@ -43,13 +45,20 @@ var operands = 0;
                operators.addEventListener('click' , function(event)
                {
                     operands++;
-                    if (operands == 2)
+                    if (event.target.textContent == "+" || event.target.textContent == "-" || event.target.textContent == "*"|| event.target.textContent == "/")
                     {
-                         output.textContent = operate(operator, a, b);
-                         a = operate(operator, a, b);
-                         tof = !tof;
-                         count = 0;
-                         operands--;
+                         if (operands >= 2 && tof != false)
+                         {
+                              output.textContent = operate(operator, a, b);
+                              a = operate(operator, a, b);
+                              tof = !tof;
+                              count = 0;
+                              operands--;
+                         }
+                         if (event.target.textContent == "/")
+                         {
+                              DNE = true;
+                         }
                     }
                     tof = true;
                     prevOutput.textContent += event.target.textContent;
@@ -67,6 +76,10 @@ var operands = 0;
                b = 0;
                tof = false;
                count = 0;
+               if (DNE == true && output.textContent == 0)
+               {
+                    output.textContent = "DNE";
+               }
           });
           container.appendChild(equals);
           for(i = 0; i < 10; i++)
@@ -76,6 +89,7 @@ var operands = 0;
                number.textContent = i;
                number.addEventListener('click' , function(event)
                {
+                    
                     count++;
                     prevOutput.textContent += event.target.textContent;
                     output.textContent += event.target.textContent;

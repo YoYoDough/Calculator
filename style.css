@@ -28,6 +28,7 @@
 .operators{
     width: 90px;
     height: 100px;
+    align-self: start;
 }
 .equals{
     width: 90px;
