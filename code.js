@@ -34,6 +34,7 @@ var tof = false;
 var operands = 0;
 var DNE = false;
 var negNumber = false;
+var decCounter = 0;
      function makeButtons(number, operators, equals)
      {
           for (i = 0; i < 4; i++)
@@ -82,26 +83,38 @@ var negNumber = false;
                }
           });
           container.appendChild(equals);
-          for(i = 0; i < 10; i++)
+          for(i = 0; i < 11; i++)
           {
                var number = document.createElement('button');
                number.classList.add('box');
                number.textContent = i;
+               if (number.textContent == '10' && i == 10)
+               {
+                    number.textContent = '.';
+               }
                number.addEventListener('click' , function(event)
                {
                     
                     count++;
                     prevOutput.textContent += event.target.textContent;
                     output.textContent += event.target.textContent;
+                    if (number.textContent = ".")
+                    {
+                         decCounter++;
+                    }
+                    if (decCounter > 1)
+                    {
+                         
+                    }
                     if (count != 0 && tof == false && operands == 0)
                     {
                          a = output.textContent;
-                         a = parseInt(a);
+                         a = parseFloat(a);
                     }
                     if (tof == true)
                     {
                          b = output.textContent;
-                         b = parseInt(b);
+                         b = parseFloat(b);
                     }
                });
                container.appendChild(number);
