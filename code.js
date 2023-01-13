@@ -85,6 +85,7 @@ var decCounter = 0;
                a = operate(operator, a, b);
                b = 0;
                tof = false;
+               DNE = false;
                count = 0;
           });
           container.appendChild(equals);
