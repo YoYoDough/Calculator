@@ -56,11 +56,15 @@ var decCounter = 0;
                               count = 0;
                               operands--;
                          }
+                         
+                    }
                          if (event.target.textContent == "/")
                          {
                               DNE = true;
                          }
-                    }
+                         else{
+                              DNE = false;
+                         }
                     tof = true;
                     prevOutput.textContent += event.target.textContent;
                     output.textContent = '';
@@ -72,40 +76,36 @@ var decCounter = 0;
           equals.textContent = '=';
           equals.addEventListener('click', function(event)
           {
+               
                output.textContent = operate(operator, a, b);
+               if (DNE == true && b == '0')
+               {
+                    output.textContent = "DNE";
+               }
                a = operate(operator, a, b);
                b = 0;
                tof = false;
                count = 0;
-               if (DNE == true && output.textContent == 0)
-               {
-                    output.textContent = "DNE";
-               }
           });
           container.appendChild(equals);
-          for(i = 0; i < 11; i++)
+          for(i = 1; i < 12; i++)
           {
                var number = document.createElement('button');
                number.classList.add('box');
                number.textContent = i;
-               if (number.textContent == '10' && i == 10)
+               if (number.textContent == '11' && i == 11)
                {
                     number.textContent = '.';
                }
+               if (number.textContent == '10' && i == 10)
+               {
+                    number.textContent = '0';
+               }
                number.addEventListener('click' , function(event)
                {
-                    
                     count++;
                     prevOutput.textContent += event.target.textContent;
                     output.textContent += event.target.textContent;
-                    if (number.textContent = ".")
-                    {
-                         decCounter++;
-                    }
-                    if (decCounter > 1)
-                    {
-                         
-                    }
                     if (count != 0 && tof == false && operands == 0)
                     {
                          a = output.textContent;
@@ -130,6 +130,7 @@ var decCounter = 0;
           operator = '';
           count = 0;
           tof = false;
+          DNE = false;
           operands = 0;
      });
      
